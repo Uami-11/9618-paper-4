@@ -1,0 +1,48 @@
+#declaring the record node
+class node:
+    def __init__(self, datap, nextp):
+        self.data = datap #integer
+        self.nextNode = nextp #integer
+
+#1d array with all the nodes given in question
+linkedList = [node(1,1), node(5,4), node(6,7), node(7,-1), node(2,2), node(0,6),
+              node(0,8), node(56,3), node(0,9), node(0,-1)]
+#pointers declared with given values
+startPointer = 0
+emptyList = 5
+
+def ouputNodes(array, spointer):
+    next = spointer
+    #looping through the linked list, following the nodes and outputing them
+    for i in range(len(array)):
+        print(array[next].data)
+        next = array[next].nextNode
+
+
+
+
+def addNode(array, start, empty):
+    add = int(input("Enter data to add: "))
+    if empty<0 or empty>9:
+        return False
+    else:
+        newNode = node(add, -1)
+        array[empty] = newNode
+
+        previousPointer = 0
+        while start != -1:
+            previousPointer = start
+            start = array[start].nextNode
+        array[previousPointer].nextNode = emptyList
+        empty = array[empty].nextNode
+        return True
+
+ouputNodes(linkedList, startPointer)
+added = addNode(linkedList, startPointer, emptyList)
+
+if added:
+    print("Data added")
+else:
+    print("Data not added")
+
+ouputNodes(linkedList,startPointer)
